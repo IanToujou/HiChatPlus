@@ -65,42 +65,88 @@ public class Config {
 
         }
 
-        Logger.log(LogLevel.WARNING, "Updating settings.yml if necessary...");
-        YamlConfiguration configuration = new YamlConfiguration();
+        if(settingsConfigFile.exists()) {
 
-        if(configuration.isSet("Main.Enabled")) {
-            configuration.set("Main.Enabled", true);
-        }
-        if(configuration.isSet("Main.UseDatabase")) {
-            configuration.set("Main.UseDatabase", false);
-        }
-        if(configuration.isSet("Features.Chat.Default.Enabled")) {
-            configuration.set("Features.Chat.Default.Enabled", true);
-        }
-        if(configuration.isSet("Features.Chat.Default.Format")) {
-            configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
-        }
-        if(configuration.isSet("Features.Chat.Private.Enabled")) {
-            configuration.set("Features.Chat.Private.Enabled", true);
-        }
-        if(configuration.isSet("Features.Chat.Private.FormatSender")) {
-            configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
-        }
-        if(configuration.isSet("Features.Chat.Private.FormatTarget")) {
-            configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+            YamlConfiguration configuration = new YamlConfiguration();
+
+            if(configuration.getInt("Config.Version") < HiChatPlus.CONFIG_VERSION) {
+
+                Logger.log(LogLevel.WARNING, "Configuration file settings.yml is outdated. Updating now...");
+
+                if(configuration.isSet("Main.Enabled")) {
+                    configuration.set("Main.Enabled", true);
+                }
+                if(configuration.isSet("Main.UseDatabase")) {
+                    configuration.set("Main.UseDatabase", false);
+                }
+                if(configuration.isSet("Features.Chat.Default.Enabled")) {
+                    configuration.set("Features.Chat.Default.Enabled", true);
+                }
+                if(configuration.isSet("Features.Chat.Default.Format")) {
+                    configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
+                }
+                if(configuration.isSet("Features.Chat.Private.Enabled")) {
+                    configuration.set("Features.Chat.Private.Enabled", true);
+                }
+                if(configuration.isSet("Features.Chat.Private.FormatSender")) {
+                    configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
+                }
+                if(configuration.isSet("Features.Chat.Private.FormatTarget")) {
+                    configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+                }
+
+            }
+
+            try {
+
+                configuration.save(settingsConfigFile);
+
+            } catch(IOException exception) {
+
+                exception.printStackTrace();
+
+            }
+
+        } else {
+
+            Logger.log(LogLevel.WARNING, "Configuration file settings.yml not found. Creating now...");
+            YamlConfiguration configuration = new YamlConfiguration();
+
+            if(configuration.isSet("Main.Enabled")) {
+                configuration.set("Main.Enabled", true);
+            }
+            if(configuration.isSet("Main.UseDatabase")) {
+                configuration.set("Main.UseDatabase", false);
+            }
+            if(configuration.isSet("Features.Chat.Default.Enabled")) {
+                configuration.set("Features.Chat.Default.Enabled", true);
+            }
+            if(configuration.isSet("Features.Chat.Default.Format")) {
+                configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
+            }
+            if(configuration.isSet("Features.Chat.Private.Enabled")) {
+                configuration.set("Features.Chat.Private.Enabled", true);
+            }
+            if(configuration.isSet("Features.Chat.Private.FormatSender")) {
+                configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
+            }
+            if(configuration.isSet("Features.Chat.Private.FormatTarget")) {
+                configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+            }
+
+            try {
+
+                configuration.save(settingsConfigFile);
+
+            } catch(IOException exception) {
+
+                exception.printStackTrace();
+
+            }
+
         }
 
-        try {
-
-            configuration.save(settingsConfigFile);
-
-        } catch(IOException exception) {
-
-            exception.printStackTrace();
-
-        }
-
-        Logger.log(LogLevel.INFORMATION, "Successfully saved configuration files.");
+        Logger.log(LogLevel.INFORMATION, "Successfully checked configuration files.");
 
         YamlConfiguration databaseConfig = YamlConfiguration.loadConfiguration(databaseConfigFile);
         YamlConfiguration settingsConfig = YamlConfiguration.loadConfiguration(databaseConfigFile);
