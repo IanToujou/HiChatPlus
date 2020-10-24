@@ -4,7 +4,6 @@ import net.toujoustudios.hichatplus.main.HiChatPlus;
 import org.bukkit.Bukkit;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 /**

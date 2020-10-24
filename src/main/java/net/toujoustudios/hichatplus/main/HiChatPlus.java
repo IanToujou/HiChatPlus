@@ -1,5 +1,6 @@
 package net.toujoustudios.hichatplus.main;
 
+import net.toujoustudios.hichatplus.listener.ChatListener;
 import net.toujoustudios.hichatplus.listener.JoinListener;
 import net.toujoustudios.hichatplus.listener.QuitListener;
 import net.toujoustudios.hichatplus.loader.Loader;
@@ -44,6 +45,7 @@ public class HiChatPlus extends JavaPlugin {
 
         pluginManager.registerEvents(new JoinListener(), this);
         pluginManager.registerEvents(new QuitListener(), this);
+        pluginManager.registerEvents(new ChatListener(), this);
 
     }
 

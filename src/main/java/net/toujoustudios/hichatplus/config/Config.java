@@ -7,6 +7,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This file was created by IanToujou.
@@ -30,11 +33,15 @@ public class Config {
     //Enabled features
     public static boolean CHAT_DEFAULT_ENABLED;
     public static boolean CHAT_PRIVATE_ENABLED;
+    public static boolean CHAT_EMOJI_ENABLED;
 
     //Formatting
     public static String CHAT_DEFAULT_FORMAT;
     public static String CHAT_PRIVATE_FORMAT_SENDER;
     public static String CHAT_PRIVATE_FORMAT_TARGET;
+
+    //Lists
+    public static List<String> CHAT_EMOJI_LIST;
 
     public static void initialize() {
 
@@ -84,16 +91,26 @@ public class Config {
                     configuration.set("Features.Chat.Default.Enabled", true);
                 }
                 if(!configuration.isSet("Features.Chat.Default.Format")) {
-                    configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
+                    configuration.set("Features.Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
                 }
                 if(!configuration.isSet("Features.Chat.Private.Enabled")) {
                     configuration.set("Features.Chat.Private.Enabled", true);
                 }
                 if(!configuration.isSet("Features.Chat.Private.FormatSender")) {
-                    configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
+                    configuration.set("Features.Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
                 }
                 if(!configuration.isSet("Features.Chat.Private.FormatTarget")) {
-                    configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+                    configuration.set("Features.Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+                }
+                if(!configuration.isSet("Features.Chat.Emoji.Enabled")) {
+                    configuration.set("Features.Chat.Emoji.Enabled", true);
+                }
+                if(!configuration.isSet("Features.Chat.Emoji.List")) {
+                    ArrayList<String> emoji = new ArrayList<>();
+                    emoji.add("heart/§c❤§7");
+                    emoji.add("green_heart/§a❤§7");
+                    emoji.add("purple_heart/§5❤§7");
+                    configuration.set("Features.Chat.Emoji.List", emoji);
                 }
 
                 try {
@@ -120,16 +137,26 @@ public class Config {
                 configuration.set("Features.Chat.Default.Enabled", true);
             }
             if(!configuration.isSet("Features.Chat.Default.Format")) {
-                configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
+                configuration.set("Features.Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
             }
             if(!configuration.isSet("Features.Chat.Private.Enabled")) {
                 configuration.set("Features.Chat.Private.Enabled", true);
             }
             if(!configuration.isSet("Features.Chat.Private.FormatSender")) {
-                configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
+                configuration.set("Features.Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
             }
             if(!configuration.isSet("Features.Chat.Private.FormatTarget")) {
-                configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+                configuration.set("Features.Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+            }
+            if(!configuration.isSet("Features.Chat.Emoji")) {
+                configuration.set("Features.Chat.Emoji.Enabled", true);
+            }
+            if(!configuration.isSet("Features.Chat.Emoji.List")) {
+                ArrayList<String> emoji = new ArrayList<>();
+                emoji.add("heart/§c❤§7");
+                emoji.add("green_heart/§a❤§7");
+                emoji.add("purple_heart/§5❤§7");
+                configuration.set("Features.Chat.Emoji.List", emoji);
             }
 
             try {
@@ -141,7 +168,7 @@ public class Config {
         }
 
         YamlConfiguration databaseConfig = YamlConfiguration.loadConfiguration(databaseConfigFile);
-        YamlConfiguration settingsConfig = YamlConfiguration.loadConfiguration(databaseConfigFile);
+        YamlConfiguration settingsConfig = YamlConfiguration.loadConfiguration(settingsConfigFile);
 
         DATABASE_HOST = databaseConfig.getString("Host");
         DATABASE_PORT = databaseConfig.getString("Port");
@@ -157,6 +184,8 @@ public class Config {
         CHAT_PRIVATE_ENABLED = settingsConfig.getBoolean("Features.Chat.Private.Enabled");
         CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Features.Chat.Private.FormatSender");
         CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Features.Chat.Default.FormatTarget");
+        CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Features.Chat.Emoji.Enabled");
+        CHAT_EMOJI_LIST = settingsConfig.getStringList("Features.Chat.Emoji.List");
 
         Logger.log(LogLevel.INFORMATION, "Successfully loaded the configuration files.");
 
