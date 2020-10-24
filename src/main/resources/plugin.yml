@@ -1,0 +1,7 @@
+name: HiChatPlus
+version: 0.1.0
+api-version: 1.16
+author: Toujou Studios
+authors:
+  - IanToujou
+main: net.toujoustudios.hichatplus.main.HiChatPlus
