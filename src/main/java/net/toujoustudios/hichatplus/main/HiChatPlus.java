@@ -1,5 +1,9 @@
 package net.toujoustudios.hichatplus.main;
 
+import net.toujoustudios.hichatplus.listener.JoinListener;
+import net.toujoustudios.hichatplus.listener.QuitListener;
+import net.toujoustudios.hichatplus.loader.Loader;
+import net.toujoustudios.hichatplus.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class HiChatPlus extends JavaPlugin {
 
     public static String PLUGIN_NAME = "HiChatPlus";
+    public static String PLUGIN_VERSION = "0.1.0";
 
     private static HiChatPlus instance;
     private PluginManager pluginManager;
@@ -22,17 +27,22 @@ public class HiChatPlus extends JavaPlugin {
         instance = this;
         pluginManager = Bukkit.getPluginManager();
 
-    }
-
-    public void registerCommands() {
-
-
+        Loader.startLoading();
 
     }
+
+    public void onDisable() {
+
+        PlayerManager.unloadAll();
+
+    }
+
+    public void registerCommands() {}
 
     public void registerEvents() {
 
-
+        pluginManager.registerEvents(new JoinListener(), this);
+        pluginManager.registerEvents(new QuitListener(), this);
 
     }
 

@@ -6,6 +6,9 @@ import net.toujoustudios.hichatplus.database.DatabaseTimer;
 import net.toujoustudios.hichatplus.log.LogLevel;
 import net.toujoustudios.hichatplus.log.Logger;
 import net.toujoustudios.hichatplus.main.HiChatPlus;
+import net.toujoustudios.hichatplus.player.PlayerManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 /**
  * This file was created by IanToujou.
@@ -63,6 +66,17 @@ public class Loader {
         if(cancelled) return;
 
         state = LoaderState.POST_INIT;
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+
+            if(player != null) {
+
+                PlayerManager playerManager = new PlayerManager(player.getUniqueId());
+                PlayerManager.getPlayers().put(player.getUniqueId(), playerManager);
+
+            }
+
+        }
 
         Logger.log(LogLevel.INFORMATION, "Post initialization completed.");
         state = LoaderState.FINISHED;

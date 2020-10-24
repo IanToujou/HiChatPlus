@@ -1,6 +1,5 @@
 package net.toujoustudios.hichatplus.config;
 
-import net.toujoustudios.hichatplus.loader.Loader;
 import net.toujoustudios.hichatplus.log.LogLevel;
 import net.toujoustudios.hichatplus.log.Logger;
 import net.toujoustudios.hichatplus.main.HiChatPlus;
@@ -66,42 +65,38 @@ public class Config {
 
         }
 
-        if(!settingsConfigFile.exists()) {
+        Logger.log(LogLevel.WARNING, "Updating settings.yml if necessary...");
+        YamlConfiguration configuration = new YamlConfiguration();
 
-            Logger.log(LogLevel.WARNING, "Configuration file settings.yml not found. Creating now...");
-            YamlConfiguration configuration = new YamlConfiguration();
+        if(configuration.isSet("Main.Enabled")) {
+            configuration.set("Main.Enabled", true);
+        }
+        if(configuration.isSet("Main.UseDatabase")) {
+            configuration.set("Main.UseDatabase", false);
+        }
+        if(configuration.isSet("Features.Chat.Default.Enabled")) {
+            configuration.set("Features.Chat.Default.Enabled", true);
+        }
+        if(configuration.isSet("Features.Chat.Default.Format")) {
+            configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
+        }
+        if(configuration.isSet("Features.Chat.Private.Enabled")) {
+            configuration.set("Features.Chat.Private.Enabled", true);
+        }
+        if(configuration.isSet("Features.Chat.Private.FormatSender")) {
+            configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
+        }
+        if(configuration.isSet("Features.Chat.Private.FormatTarget")) {
+            configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
+        }
 
-            if(configuration.isSet("Main.Enabled")) {
-                configuration.set("Main.Enabled", true);
-            }
-            if(configuration.isSet("Main.UseDatabase")) {
-                configuration.set("Main.UseDatabase", false);
-            }
-            if(configuration.isSet("Features.Chat.Default.Enabled")) {
-                configuration.set("Features.Chat.Default.Enabled", true);
-            }
-            if(configuration.isSet("Features.Chat.Default.Format")) {
-                configuration.set("Features.Chat.Default.Format", "§e{Player} §8| §7{Message}");
-            }
-            if(configuration.isSet("Features.Chat.Private.Enabled")) {
-                configuration.set("Features.Chat.Private.Enabled", true);
-            }
-            if(configuration.isSet("Features.Chat.Private.FormatSender")) {
-                configuration.set("Features.Chat.Private.FormatSender", "§7To §e{Player} §8| §a{Message}");
-            }
-            if(configuration.isSet("Features.Chat.Private.FormatTarget")) {
-                configuration.set("Features.Chat.Private.FormatTarget", "§7From §e{Player} §8| §a{Message}");
-            }
+        try {
 
-            try {
+            configuration.save(settingsConfigFile);
 
-                configuration.save(settingsConfigFile);
+        } catch(IOException exception) {
 
-            } catch(IOException exception) {
-
-                exception.printStackTrace();
-
-            }
+            exception.printStackTrace();
 
         }
 
