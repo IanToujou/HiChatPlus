@@ -1,5 +1,6 @@
 package net.toujoustudios.hichatplus.log;
 
+import net.toujoustudios.hichatplus.main.HiChatPlus;
 import org.bukkit.Bukkit;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class Logger {
 
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", new Locale("de", "DE"));
         SimpleDateFormat fileDate = new SimpleDateFormat("dd-MM-yyyy");
-        Bukkit.getConsoleSender().sendMessage(level.getColor() + "[" + format.format(new Date()) + " - " + level + "] " + message);
+        Bukkit.getConsoleSender().sendMessage(level.getColor() + "[" + HiChatPlus.PLUGIN_NAME + " - " + level + "] " + message);
 
     }
 

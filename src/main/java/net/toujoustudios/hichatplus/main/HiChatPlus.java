@@ -18,7 +18,7 @@ public class HiChatPlus extends JavaPlugin {
 
     public static String PLUGIN_NAME = "HiChatPlus";
     public static String PLUGIN_VERSION = "0.1.0";
-    public static int CONFIG_VERSION = 0;
+    public static int CONFIG_VERSION = 1;
 
     private static HiChatPlus instance;
     private PluginManager pluginManager;
