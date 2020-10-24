@@ -7,7 +7,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +41,12 @@ public class Config {
 
     //Lists
     public static List<String> CHAT_EMOJI_LIST;
+
+    //Message
+    public static String MESSAGE_PREFIX;
+    public static String MESSAGE_ERROR_NOPERMISSION;
+    public static String MESSAGE_ERROR_SYNTAX;
+    public static String MESSAGE_ERROR_INVALIDPLAYER;
 
     public static void initialize() {
 
@@ -81,36 +86,45 @@ public class Config {
                 Logger.log(LogLevel.WARNING, "Configuration file settings.yml is outdated. Updating now...");
                 configuration.set("Config.Version", HiChatPlus.CONFIG_VERSION);
 
-                if(!configuration.isSet("Main.Enabled")) {
-                    configuration.set("Main.Enabled", true);
+                if(!configuration.isSet("UseDatabase")) {
+                    configuration.set("UseDatabase", false);
                 }
-                if(!configuration.isSet("Main.UseDatabase")) {
-                    configuration.set("Main.UseDatabase", false);
+                if(!configuration.isSet("Chat.Default.Enabled")) {
+                    configuration.set("Chat.Default.Enabled", true);
                 }
-                if(!configuration.isSet("Features.Chat.Default.Enabled")) {
-                    configuration.set("Features.Chat.Default.Enabled", true);
+                if(!configuration.isSet("Chat.Default.Format")) {
+                    configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
                 }
-                if(!configuration.isSet("Features.Chat.Default.Format")) {
-                    configuration.set("Features.Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
+                if(!configuration.isSet("Chat.Private.Enabled")) {
+                    configuration.set("Chat.Private.Enabled", true);
                 }
-                if(!configuration.isSet("Features.Chat.Private.Enabled")) {
-                    configuration.set("Features.Chat.Private.Enabled", true);
+                if(!configuration.isSet("Chat.Private.FormatSender")) {
+                    configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
                 }
-                if(!configuration.isSet("Features.Chat.Private.FormatSender")) {
-                    configuration.set("Features.Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
+                if(!configuration.isSet("Chat.Private.FormatTarget")) {
+                    configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
                 }
-                if(!configuration.isSet("Features.Chat.Private.FormatTarget")) {
-                    configuration.set("Features.Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+                if(!configuration.isSet("Chat.Emoji.Enabled")) {
+                    configuration.set("Chat.Emoji.Enabled", true);
                 }
-                if(!configuration.isSet("Features.Chat.Emoji.Enabled")) {
-                    configuration.set("Features.Chat.Emoji.Enabled", true);
-                }
-                if(!configuration.isSet("Features.Chat.Emoji.List")) {
+                if(!configuration.isSet("Chat.Emoji.List")) {
                     ArrayList<String> emoji = new ArrayList<>();
                     emoji.add("heart/§c❤§7");
                     emoji.add("green_heart/§a❤§7");
                     emoji.add("purple_heart/§5❤§7");
-                    configuration.set("Features.Chat.Emoji.List", emoji);
+                    configuration.set("Chat.Emoji.List", emoji);
+                }
+                if(!configuration.isSet("Message.Prefix")) {
+                    configuration.set("Message.Prefix", "§6HiChatPlus §8|");
+                }
+                if(!configuration.isSet("Message.Error.NoPermission")) {
+                    configuration.set("Message.Error.NoPermission", "{Prefix} §cYou don't have the permission to perform this command§8.");
+                }
+                if(!configuration.isSet("Message.Error.Syntax")) {
+                    configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §e{Usage}");
+                }
+                if(!configuration.isSet("Message.Error.InvalidPlayer")) {
+                    configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
                 }
 
                 try {
@@ -127,36 +141,45 @@ public class Config {
             YamlConfiguration configuration = new YamlConfiguration();
             configuration.set("Config.Version", HiChatPlus.CONFIG_VERSION);
 
-            if(!configuration.isSet("Main.Enabled")) {
-                configuration.set("Main.Enabled", true);
+            if(!configuration.isSet("UseDatabase")) {
+                configuration.set("UseDatabase", false);
             }
-            if(!configuration.isSet("Main.UseDatabase")) {
-                configuration.set("Main.UseDatabase", false);
+            if(!configuration.isSet("Chat.Default.Enabled")) {
+                configuration.set("Chat.Default.Enabled", true);
             }
-            if(!configuration.isSet("Features.Chat.Default.Enabled")) {
-                configuration.set("Features.Chat.Default.Enabled", true);
+            if(!configuration.isSet("Chat.Default.Format")) {
+                configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
             }
-            if(!configuration.isSet("Features.Chat.Default.Format")) {
-                configuration.set("Features.Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
+            if(!configuration.isSet("Chat.Private.Enabled")) {
+                configuration.set("Chat.Private.Enabled", true);
             }
-            if(!configuration.isSet("Features.Chat.Private.Enabled")) {
-                configuration.set("Features.Chat.Private.Enabled", true);
+            if(!configuration.isSet("Chat.Private.FormatSender")) {
+                configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
             }
-            if(!configuration.isSet("Features.Chat.Private.FormatSender")) {
-                configuration.set("Features.Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
+            if(!configuration.isSet("Chat.Private.FormatTarget")) {
+                configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
             }
-            if(!configuration.isSet("Features.Chat.Private.FormatTarget")) {
-                configuration.set("Features.Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+            if(!configuration.isSet("Chat.Emoji.Enabled")) {
+                configuration.set("Chat.Emoji.Enabled", true);
             }
-            if(!configuration.isSet("Features.Chat.Emoji")) {
-                configuration.set("Features.Chat.Emoji.Enabled", true);
-            }
-            if(!configuration.isSet("Features.Chat.Emoji.List")) {
+            if(!configuration.isSet("Chat.Emoji.List")) {
                 ArrayList<String> emoji = new ArrayList<>();
                 emoji.add("heart/§c❤§7");
                 emoji.add("green_heart/§a❤§7");
                 emoji.add("purple_heart/§5❤§7");
-                configuration.set("Features.Chat.Emoji.List", emoji);
+                configuration.set("Chat.Emoji.List", emoji);
+            }
+            if(!configuration.isSet("Message.Prefix")) {
+                configuration.set("Message.Prefix", "§6HiChatPlus §8|");
+            }
+            if(!configuration.isSet("Message.Error.NoPermission")) {
+                configuration.set("Message.Error.NoPermission", "{Prefix} §cYou don't have the permission to perform this command§8.");
+            }
+            if(!configuration.isSet("Message.Error.Syntax")) {
+                configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §e{Usage}");
+            }
+            if(!configuration.isSet("Message.Error.InvalidPlayer")) {
+                configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
             }
 
             try {
@@ -186,6 +209,11 @@ public class Config {
         CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Features.Chat.Default.FormatTarget");
         CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Features.Chat.Emoji.Enabled");
         CHAT_EMOJI_LIST = settingsConfig.getStringList("Features.Chat.Emoji.List");
+
+        MESSAGE_PREFIX = settingsConfig.getString("Message.Format");
+        MESSAGE_ERROR_NOPERMISSION = settingsConfig.getString("Message.Error.NoPermission");
+        MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax");
+        MESSAGE_ERROR_INVALIDPLAYER = settingsConfig.getString("Message.Error.InvalidPlayer");
 
         Logger.log(LogLevel.INFORMATION, "Successfully loaded the configuration files.");
 

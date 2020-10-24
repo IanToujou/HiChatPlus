@@ -1,5 +1,6 @@
 package net.toujoustudios.hichatplus.main;
 
+import net.toujoustudios.hichatplus.command.MessageCommand;
 import net.toujoustudios.hichatplus.listener.ChatListener;
 import net.toujoustudios.hichatplus.listener.JoinListener;
 import net.toujoustudios.hichatplus.listener.QuitListener;
@@ -39,7 +40,14 @@ public class HiChatPlus extends JavaPlugin {
 
     }
 
-    public void registerCommands() {}
+    @SuppressWarnings("all")
+    public void registerCommands() {
+
+        getCommand("message").setExecutor(new MessageCommand());
+        getCommand("msg").setExecutor(new MessageCommand());
+        getCommand("tell").setExecutor(new MessageCommand());
+
+    }
 
     public void registerEvents() {
 

@@ -5,3 +5,19 @@ author: Toujou Studios
 authors:
   - IanToujou
 main: net.toujoustudios.hichatplus.main.HiChatPlus
+
+command:
+  message:
+    description: Message a player privately.
+    aliases: [msg, tell]
+    permission: hichatplus.command.message
+    usage: /message <player> <message>
+
+permissions:
+  hichatplus.group.player:
+    description: The player group.
+    children:
+      hichatplus.command.message: true
+  hichatplus.command.message:
+    description: Allows players to use the message command.
+    default: true

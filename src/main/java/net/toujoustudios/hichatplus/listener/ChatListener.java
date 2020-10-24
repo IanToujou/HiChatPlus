@@ -18,24 +18,32 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
 
-        event.setCancelled(true);
+        if(Config.CHAT_DEFAULT_ENABLED) {
 
-        Player player = event.getPlayer();
-        String message = Config.CHAT_DEFAULT_FORMAT;
+            event.setCancelled(true);
 
-        message = message.replace("{Player}", player.getDisplayName());
-        message = message.replace("{Message}", event.getMessage());
+            Player player = event.getPlayer();
+            String message = Config.CHAT_DEFAULT_FORMAT;
 
-        for(String emoji : Config.CHAT_EMOJI_LIST) {
+            message = message.replace("{Player}", player.getDisplayName());
+            message = message.replace("{Message}", event.getMessage());
 
-            String[] strings = emoji.split("/");
-            message = message.replace(":" + strings[0] + ":", strings[1]);
+            if(Config.CHAT_EMOJI_ENABLED) {
 
-        }
+                for(String emoji : Config.CHAT_EMOJI_LIST) {
 
-        for(Player all : Bukkit.getOnlinePlayers()) {
+                    String[] strings = emoji.split("/");
+                    message = message.replace(":" + strings[0] + ":", strings[1]);
 
-            all.sendMessage(message);
+                }
+
+            }
+
+            for(Player all : Bukkit.getOnlinePlayers()) {
+
+                all.sendMessage(message);
+
+            }
 
         }
 
