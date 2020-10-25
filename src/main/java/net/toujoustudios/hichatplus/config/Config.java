@@ -3,6 +3,8 @@ package net.toujoustudios.hichatplus.config;
 import net.toujoustudios.hichatplus.log.LogLevel;
 import net.toujoustudios.hichatplus.log.Logger;
 import net.toujoustudios.hichatplus.main.HiChatPlus;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -47,6 +49,12 @@ public class Config {
     public static String MESSAGE_ERROR_NOPERMISSION;
     public static String MESSAGE_ERROR_SYNTAX;
     public static String MESSAGE_ERROR_INVALIDPLAYER;
+
+    //Sound
+    public static boolean CHAT_PRIVATE_SOUND_ENABLED;
+    public static Sound CHAT_PRIVATE_SOUND_TYPE;
+    public static float CHAT_PRIVATE_SOUND_PITCH;
+    public static SoundCategory CHAT_PRIVATE_SOUND_CATEGORY;
 
     public static void initialize() {
 
@@ -97,6 +105,18 @@ public class Config {
                 }
                 if(!configuration.isSet("Chat.Private.Enabled")) {
                     configuration.set("Chat.Private.Enabled", true);
+                }
+                if(!configuration.isSet("Chat.Private.Sound.Enabled")) {
+                    configuration.set("Chat.Private.Sound.Enabled", true);
+                }
+                if(!configuration.isSet("Chat.Private.Sound.Type")) {
+                    configuration.set("Chat.Private.Sound.Type", "BLOCK_NOTE_BLOCK_PLING");
+                }
+                if(!configuration.isSet("Chat.Private.Sound.Pitch")) {
+                    configuration.set("Chat.Private.Sound.Pitch", 1.0f);
+                }
+                if(!configuration.isSet("Chat.Private.Sound.Category")) {
+                    configuration.set("Chat.Private.Sound.Category", "MASTER");
                 }
                 if(!configuration.isSet("Chat.Private.FormatSender")) {
                     configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
@@ -153,6 +173,18 @@ public class Config {
             if(!configuration.isSet("Chat.Private.Enabled")) {
                 configuration.set("Chat.Private.Enabled", true);
             }
+            if(!configuration.isSet("Chat.Private.Sound.Enabled")) {
+                configuration.set("Chat.Private.Sound.Enabled", true);
+            }
+            if(!configuration.isSet("Chat.Private.Sound.Type")) {
+                configuration.set("Chat.Private.Sound.Type", "BLOCK_NOTE_BLOCK_PLING");
+            }
+            if(!configuration.isSet("Chat.Private.Sound.Pitch")) {
+                configuration.set("Chat.Private.Sound.Pitch", 1.0f);
+            }
+            if(!configuration.isSet("Chat.Private.Sound.Category")) {
+                configuration.set("Chat.Private.Sound.Category", "MASTER");
+            }
             if(!configuration.isSet("Chat.Private.FormatSender")) {
                 configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
             }
@@ -205,6 +237,10 @@ public class Config {
         CHAT_DEFAULT_ENABLED = settingsConfig.getBoolean("Chat.Default.Enabled");
         CHAT_DEFAULT_FORMAT = settingsConfig.getString("Chat.Default.Format");
         CHAT_PRIVATE_ENABLED = settingsConfig.getBoolean("Chat.Private.Enabled");
+        CHAT_PRIVATE_SOUND_ENABLED = settingsConfig.getBoolean("Chat.Private.Sound.Enabled");
+        CHAT_PRIVATE_SOUND_TYPE = Sound.valueOf(settingsConfig.getString("Chat.Private.Sound.Type"));
+        CHAT_PRIVATE_SOUND_PITCH = (float) settingsConfig.getDouble("Chat.Private.Sound.Pitch");
+        CHAT_PRIVATE_SOUND_CATEGORY = SoundCategory.valueOf(settingsConfig.getString("Chat.Private.Sound.Category"));
         CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Chat.Private.FormatSender");
         CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Chat.Private.FormatTarget");
         CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Chat.Emoji.Enabled");

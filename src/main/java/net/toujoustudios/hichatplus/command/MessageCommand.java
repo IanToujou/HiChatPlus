@@ -60,6 +60,12 @@ public class MessageCommand implements CommandExecutor {
                 player.sendMessage(Config.CHAT_PRIVATE_FORMAT_SENDER.replace("{Player}", target.getName()).replace("{Message}", message));
                 target.sendMessage(Config.CHAT_PRIVATE_FORMAT_TARGET.replace("{Player}", player.getName()).replace("{Message}", message));
 
+                if(Config.CHAT_PRIVATE_SOUND_ENABLED) {
+
+                    player.playSound(player.getLocation(), Config.CHAT_PRIVATE_SOUND_TYPE, Config.CHAT_PRIVATE_SOUND_CATEGORY, 100f, Config.CHAT_PRIVATE_SOUND_PITCH);
+
+                }
+
             } else {
                 player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Prefix}", Config.MESSAGE_PREFIX).replace("{Usage}", command.getUsage()));
             }
