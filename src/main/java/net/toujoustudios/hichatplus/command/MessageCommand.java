@@ -1,7 +1,6 @@
 package net.toujoustudios.hichatplus.command;
 
 import net.toujoustudios.hichatplus.config.Config;
-import net.toujoustudios.hichatplus.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,7 +21,6 @@ public class MessageCommand implements CommandExecutor {
         if(!(commandSender instanceof Player)) return false;
 
         Player player = (Player) commandSender;
-        PlayerManager playerManager = PlayerManager.getPlayers().get(player.getUniqueId());
 
         if(player.hasPermission("hichatplus.command.message")) {
 
@@ -37,17 +35,30 @@ public class MessageCommand implements CommandExecutor {
 
                 }
 
-                StringBuilder message = new StringBuilder();
+                StringBuilder messageBuilder = new StringBuilder();
 
-                for(String part : args) {
+                for(int i = 1; i < args.length; i++) {
 
-                    if(!message.toString().equals("")) message.append(" ");
-                    message.append(part);
+                    messageBuilder.append(args[i]);
+                    if(i != (args.length - 1)) messageBuilder.append(" ");
 
                 }
 
-                player.sendMessage(Config.CHAT_PRIVATE_FORMAT_SENDER.replace("{Player}", target.getName()).replace("{Message}", message.toString()));
-                target.sendMessage(Config.CHAT_PRIVATE_FORMAT_TARGET.replace("{Player}", player.getName()).replace("{Message}", message.toString()));
+                String message = messageBuilder.toString();
+
+                if(Config.CHAT_EMOJI_ENABLED) {
+
+                    for(String emoji : Config.CHAT_EMOJI_LIST) {
+
+                        String[] strings = emoji.split("/");
+                        message = message.replace(":" + strings[0] + ":", strings[1]);
+
+                    }
+
+                }
+
+                player.sendMessage(Config.CHAT_PRIVATE_FORMAT_SENDER.replace("{Player}", target.getName()).replace("{Message}", message));
+                target.sendMessage(Config.CHAT_PRIVATE_FORMAT_TARGET.replace("{Player}", player.getName()).replace("{Message}", message));
 
             } else {
                 player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Prefix}", Config.MESSAGE_PREFIX).replace("{Usage}", command.getUsage()));

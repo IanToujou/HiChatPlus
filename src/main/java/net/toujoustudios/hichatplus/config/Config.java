@@ -118,10 +118,10 @@ public class Config {
                     configuration.set("Message.Prefix", "§6HiChatPlus §8|");
                 }
                 if(!configuration.isSet("Message.Error.NoPermission")) {
-                    configuration.set("Message.Error.NoPermission", "{Prefix} §cYou don't have the permission to perform this command§8.");
+                    configuration.set("Message.Error.NoPermission", "{Prefix} §cYou do not have the permission to perform this command§8.");
                 }
                 if(!configuration.isSet("Message.Error.Syntax")) {
-                    configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §e{Usage}");
+                    configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
                 }
                 if(!configuration.isSet("Message.Error.InvalidPlayer")) {
                     configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
@@ -173,10 +173,10 @@ public class Config {
                 configuration.set("Message.Prefix", "§6HiChatPlus §8|");
             }
             if(!configuration.isSet("Message.Error.NoPermission")) {
-                configuration.set("Message.Error.NoPermission", "{Prefix} §cYou don't have the permission to perform this command§8.");
+                configuration.set("Message.Error.NoPermission", "{Prefix} §cYou do not have the permission to perform this command§8.");
             }
             if(!configuration.isSet("Message.Error.Syntax")) {
-                configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §e{Usage}");
+                configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
             }
             if(!configuration.isSet("Message.Error.InvalidPlayer")) {
                 configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
@@ -199,18 +199,18 @@ public class Config {
         DATABASE_USER = databaseConfig.getString("User");
         DATABASE_PASSWORD = databaseConfig.getString("Password");
 
-        ENABLED = settingsConfig.getBoolean("Main.Enabled");
-        USE_DATABASE = settingsConfig.getBoolean("Main.UseDatabase");
+        ENABLED = settingsConfig.getBoolean("Enabled");
+        USE_DATABASE = settingsConfig.getBoolean("UseDatabase");
 
-        CHAT_DEFAULT_ENABLED = settingsConfig.getBoolean("Features.Chat.Default.Enabled");
-        CHAT_DEFAULT_FORMAT = settingsConfig.getString("Features.Chat.Default.Format");
-        CHAT_PRIVATE_ENABLED = settingsConfig.getBoolean("Features.Chat.Private.Enabled");
-        CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Features.Chat.Private.FormatSender");
-        CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Features.Chat.Default.FormatTarget");
-        CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Features.Chat.Emoji.Enabled");
-        CHAT_EMOJI_LIST = settingsConfig.getStringList("Features.Chat.Emoji.List");
+        CHAT_DEFAULT_ENABLED = settingsConfig.getBoolean("Chat.Default.Enabled");
+        CHAT_DEFAULT_FORMAT = settingsConfig.getString("Chat.Default.Format");
+        CHAT_PRIVATE_ENABLED = settingsConfig.getBoolean("Chat.Private.Enabled");
+        CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Chat.Private.FormatSender");
+        CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Chat.Private.FormatTarget");
+        CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Chat.Emoji.Enabled");
+        CHAT_EMOJI_LIST = settingsConfig.getStringList("Chat.Emoji.List");
 
-        MESSAGE_PREFIX = settingsConfig.getString("Message.Format");
+        MESSAGE_PREFIX = settingsConfig.getString("Message.Prefix");
         MESSAGE_ERROR_NOPERMISSION = settingsConfig.getString("Message.Error.NoPermission");
         MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax");
         MESSAGE_ERROR_INVALIDPLAYER = settingsConfig.getString("Message.Error.InvalidPlayer");
