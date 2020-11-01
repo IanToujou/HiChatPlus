@@ -20,30 +20,26 @@ public class ChatListener implements Listener {
 
         if(Config.CHAT_DEFAULT_ENABLED) {
 
-            event.setCancelled(true);
-
             Player player = event.getPlayer();
             String message = Config.CHAT_DEFAULT_FORMAT;
 
             message = message.replace("{Player}", player.getDisplayName());
+            message = message.replace("{DefaultColor}", Config.CHAT_DEFAULT_COLOR);
             message = message.replace("{Message}", event.getMessage());
+            message = message.replace(Config.CHAT_COLOR_PREFIX, "§");
 
             if(Config.CHAT_EMOJI_ENABLED) {
 
                 for(String emoji : Config.CHAT_EMOJI_LIST) {
 
                     String[] strings = emoji.split("/");
-                    message = message.replace(":" + strings[0] + ":", strings[1]);
+                    message = message.replaceAll("(?i):" + strings[0] + ":", strings[1] + Config.CHAT_DEFAULT_COLOR);
 
                 }
 
             }
 
-            for(Player all : Bukkit.getOnlinePlayers()) {
-
-                all.sendMessage(message);
-
-            }
+            event.setFormat(message);
 
         }
 

@@ -46,23 +46,41 @@ public class MessageCommand implements CommandExecutor {
 
                 String message = messageBuilder.toString();
 
-                if(Config.CHAT_EMOJI_ENABLED) {
+                if(Config.CHAT_COLOR_ENABLED) {
 
-                    for(String emoji : Config.CHAT_EMOJI_LIST) {
+                    if(Config.CHAT_COLOR_USEPERMISSION) {
 
-                        String[] strings = emoji.split("/");
-                        message = message.replace(":" + strings[0] + ":", strings[1]);
+                        if(player.hasPermission("hichatplus.chat.color")) {
+
+                            message = message.replace(Config.CHAT_COLOR_PREFIX, "§");
+
+                        }
+
+                    } else {
+
+                        message = message.replace(Config.CHAT_COLOR_PREFIX, "§");
 
                     }
 
                 }
 
-                player.sendMessage(Config.CHAT_PRIVATE_FORMAT_SENDER.replace("{Player}", target.getName()).replace("{Message}", message));
-                target.sendMessage(Config.CHAT_PRIVATE_FORMAT_TARGET.replace("{Player}", player.getName()).replace("{Message}", message));
+                if(Config.CHAT_EMOJI_ENABLED) {
+
+                    for(String emoji : Config.CHAT_EMOJI_LIST) {
+
+                        String[] strings = emoji.split("/");
+                        message = message.replaceAll("(?i):" + strings[0] + ":", strings[1] + Config.CHAT_PRIVATE_COLOR);
+
+                    }
+
+                }
+
+                player.sendMessage(Config.CHAT_PRIVATE_FORMAT_SENDER.replace("{Player}", target.getName()).replace("{Message}", message).replace("{PrivateColor}", Config.CHAT_PRIVATE_COLOR));
+                target.sendMessage(Config.CHAT_PRIVATE_FORMAT_TARGET.replace("{Player}", player.getName()).replace("{Message}", message).replace("{PrivateColor}", Config.CHAT_PRIVATE_COLOR));
 
                 if(Config.CHAT_PRIVATE_SOUND_ENABLED) {
 
-                    player.playSound(player.getLocation(), Config.CHAT_PRIVATE_SOUND_TYPE, Config.CHAT_PRIVATE_SOUND_CATEGORY, 100f, Config.CHAT_PRIVATE_SOUND_PITCH);
+                    target.playSound(target.getLocation(), Config.CHAT_PRIVATE_SOUND_TYPE, Config.CHAT_PRIVATE_SOUND_CATEGORY, 100, Config.CHAT_PRIVATE_SOUND_PITCH);
 
                 }
 

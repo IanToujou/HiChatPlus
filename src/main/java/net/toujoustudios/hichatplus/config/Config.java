@@ -32,14 +32,21 @@ public class Config {
     public static boolean USE_DATABASE;
 
     //Enabled features
+    public static boolean CHAT_COLOR_ENABLED;
     public static boolean CHAT_DEFAULT_ENABLED;
     public static boolean CHAT_PRIVATE_ENABLED;
     public static boolean CHAT_EMOJI_ENABLED;
 
+    //Permission
+    public static boolean CHAT_COLOR_USEPERMISSION;
+
     //Formatting
     public static String CHAT_DEFAULT_FORMAT;
+    public static String CHAT_DEFAULT_COLOR;
     public static String CHAT_PRIVATE_FORMAT_SENDER;
     public static String CHAT_PRIVATE_FORMAT_TARGET;
+    public static String CHAT_PRIVATE_COLOR;
+    public static String CHAT_COLOR_PREFIX;
 
     //Lists
     public static List<String> CHAT_EMOJI_LIST;
@@ -97,11 +104,23 @@ public class Config {
                 if(!configuration.isSet("UseDatabase")) {
                     configuration.set("UseDatabase", false);
                 }
+                if(!configuration.isSet("Chat.Color.Enabled")) {
+                    configuration.set("Chat.Color.Enabled", true);
+                }
+                if(!configuration.isSet("Chat.Color.UsePermission")) {
+                    configuration.set("Chat.Color.UsePermission", false);
+                }
+                if(!configuration.isSet("Chat.Color.Prefix")) {
+                    configuration.set("Chat.Color.Prefix", "&");
+                }
                 if(!configuration.isSet("Chat.Default.Enabled")) {
                     configuration.set("Chat.Default.Enabled", true);
                 }
+                if(!configuration.isSet("Chat.Default.Color")) {
+                    configuration.set("Chat.Default.Color", "§7");
+                }
                 if(!configuration.isSet("Chat.Default.Format")) {
-                    configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
+                    configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> {DefaultColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Private.Enabled")) {
                     configuration.set("Chat.Private.Enabled", true);
@@ -118,20 +137,25 @@ public class Config {
                 if(!configuration.isSet("Chat.Private.Sound.Category")) {
                     configuration.set("Chat.Private.Sound.Category", "MASTER");
                 }
+                if(!configuration.isSet("Chat.Private.Color")) {
+                    configuration.set("Chat.Private.Color", "§a");
+                }
                 if(!configuration.isSet("Chat.Private.FormatSender")) {
-                    configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
+                    configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Private.FormatTarget")) {
-                    configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+                    configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Emoji.Enabled")) {
                     configuration.set("Chat.Emoji.Enabled", true);
                 }
                 if(!configuration.isSet("Chat.Emoji.List")) {
                     ArrayList<String> emoji = new ArrayList<>();
-                    emoji.add("heart/§c❤§7");
-                    emoji.add("green_heart/§a❤§7");
-                    emoji.add("purple_heart/§5❤§7");
+                    emoji.add("heart/§c❤");
+                    emoji.add("green_heart/§a❤");
+                    emoji.add("purple_heart/§5❤");
+                    emoji.add("skull/§f☠");
+                    emoji.add("peace/§d☮");
                     configuration.set("Chat.Emoji.List", emoji);
                 }
                 if(!configuration.isSet("Message.Prefix")) {
@@ -164,11 +188,23 @@ public class Config {
             if(!configuration.isSet("UseDatabase")) {
                 configuration.set("UseDatabase", false);
             }
+            if(!configuration.isSet("Chat.Color.Enabled")) {
+                configuration.set("Chat.Color.Enabled", true);
+            }
+            if(!configuration.isSet("Chat.Color.UsePermission")) {
+                configuration.set("Chat.Color.UsePermission", false);
+            }
+            if(!configuration.isSet("Chat.Color.Prefix")) {
+                configuration.set("Chat.Color.Prefix", "&");
+            }
             if(!configuration.isSet("Chat.Default.Enabled")) {
                 configuration.set("Chat.Default.Enabled", true);
             }
+            if(!configuration.isSet("Chat.Default.Color")) {
+                configuration.set("Chat.Default.Color", "§7");
+            }
             if(!configuration.isSet("Chat.Default.Format")) {
-                configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> §7{Message}");
+                configuration.set("Chat.Default.Format", "§6Chat §8| §e{Player} §8> {DefaultColor}{Message}");
             }
             if(!configuration.isSet("Chat.Private.Enabled")) {
                 configuration.set("Chat.Private.Enabled", true);
@@ -185,20 +221,25 @@ public class Config {
             if(!configuration.isSet("Chat.Private.Sound.Category")) {
                 configuration.set("Chat.Private.Sound.Category", "MASTER");
             }
+            if(!configuration.isSet("Chat.Private.Color")) {
+                configuration.set("Chat.Private.Color", "§a");
+            }
             if(!configuration.isSet("Chat.Private.FormatSender")) {
-                configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> §a{Message}");
+                configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
             }
             if(!configuration.isSet("Chat.Private.FormatTarget")) {
-                configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> §a{Message}");
+                configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
             }
             if(!configuration.isSet("Chat.Emoji.Enabled")) {
                 configuration.set("Chat.Emoji.Enabled", true);
             }
             if(!configuration.isSet("Chat.Emoji.List")) {
                 ArrayList<String> emoji = new ArrayList<>();
-                emoji.add("heart/§c❤§7");
-                emoji.add("green_heart/§a❤§7");
-                emoji.add("purple_heart/§5❤§7");
+                emoji.add("heart/§c❤");
+                emoji.add("green_heart/§a❤");
+                emoji.add("purple_heart/§5❤");
+                emoji.add("skull/§f☠");
+                emoji.add("peace/§d☮");
                 configuration.set("Chat.Emoji.List", emoji);
             }
             if(!configuration.isSet("Message.Prefix")) {
@@ -234,13 +275,18 @@ public class Config {
         ENABLED = settingsConfig.getBoolean("Enabled");
         USE_DATABASE = settingsConfig.getBoolean("UseDatabase");
 
+        CHAT_COLOR_ENABLED = settingsConfig.getBoolean("Chat.Color.Enabled");
+        CHAT_COLOR_USEPERMISSION = settingsConfig.getBoolean("Chat.Color.UsePermission");
+        CHAT_COLOR_PREFIX = settingsConfig.getString("Chat.Color.Prefix");
         CHAT_DEFAULT_ENABLED = settingsConfig.getBoolean("Chat.Default.Enabled");
         CHAT_DEFAULT_FORMAT = settingsConfig.getString("Chat.Default.Format");
+        CHAT_DEFAULT_COLOR = settingsConfig.getString("Chat.Default.Color");
         CHAT_PRIVATE_ENABLED = settingsConfig.getBoolean("Chat.Private.Enabled");
         CHAT_PRIVATE_SOUND_ENABLED = settingsConfig.getBoolean("Chat.Private.Sound.Enabled");
         CHAT_PRIVATE_SOUND_TYPE = Sound.valueOf(settingsConfig.getString("Chat.Private.Sound.Type"));
         CHAT_PRIVATE_SOUND_PITCH = (float) settingsConfig.getDouble("Chat.Private.Sound.Pitch");
         CHAT_PRIVATE_SOUND_CATEGORY = SoundCategory.valueOf(settingsConfig.getString("Chat.Private.Sound.Category"));
+        CHAT_PRIVATE_COLOR = settingsConfig.getString("Chat.Private.Color");
         CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Chat.Private.FormatSender");
         CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Chat.Private.FormatTarget");
         CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Chat.Emoji.Enabled");
