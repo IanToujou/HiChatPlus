@@ -1,7 +1,6 @@
 package net.toujoustudios.hichatplus.listener;
 
 import net.toujoustudios.hichatplus.config.Config;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,5 +1,8 @@
 package net.toujoustudios.hichatplus.player;
 
+import net.toujoustudios.hichatplus.config.Config;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -13,12 +16,15 @@ import java.util.UUID;
 public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
+    private static final YamlConfiguration playerConfig = Config.getConfigFile("playerdata.yml");
 
     private UUID uuid;
+    private boolean muted;
 
     public PlayerManager(UUID uuid) {
 
         this.uuid = uuid;
+        muted = playerConfig.getBoolean("Data." + uuid.toString() + ".Muted");
 
     }
 
@@ -31,6 +37,8 @@ public class PlayerManager {
 
     public void save() {
 
+        playerConfig.set("Data." + uuid.toString() + ".Muted", muted);
+        Config.saveToFile(playerConfig, "playerdata.yml");
 
     }
 
@@ -52,6 +60,14 @@ public class PlayerManager {
 
     }
 
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
+    }
+
     public static void unloadAll() {
 
         for(Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
@@ -65,6 +81,12 @@ public class PlayerManager {
     public static HashMap<UUID, PlayerManager> getPlayers() {
 
         return players;
+
+    }
+
+    public static YamlConfiguration getPlayerConfig() {
+
+        return playerConfig;
 
     }
 

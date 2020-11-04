@@ -1,6 +1,8 @@
 package net.toujoustudios.hichatplus.main;
 
 import net.toujoustudios.hichatplus.command.MessageCommand;
+import net.toujoustudios.hichatplus.command.MuteCommand;
+import net.toujoustudios.hichatplus.command.UnMuteCommand;
 import net.toujoustudios.hichatplus.listener.ChatListener;
 import net.toujoustudios.hichatplus.listener.JoinListener;
 import net.toujoustudios.hichatplus.listener.QuitListener;
@@ -46,6 +48,8 @@ public class HiChatPlus extends JavaPlugin {
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("msg").setExecutor(new MessageCommand());
         getCommand("tell").setExecutor(new MessageCommand());
+        getCommand("mute").setExecutor(new MuteCommand());
+        getCommand("unmute").setExecutor(new UnMuteCommand());
 
     }
 

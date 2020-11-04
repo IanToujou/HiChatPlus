@@ -11,12 +11,29 @@ commands:
     description: Message a player privately.
     aliases: [msg, tell]
     permission: hichatplus.command.message
+  mute:
+    description: Mute a player.
+    permission: hichatplus.command.mute
+  unmute:
+    description: Unmute a player.
+    permission: hichatplus.command.unmute
 
 permissions:
   hichatplus.group.player:
     description: The player group.
     children:
       hichatplus.command.message: true
+  hichatplus.group.admin:
+    description: The administrator group. Grants all permissions.
+    children:
+      hichatplus.command.mute: true
+      hichatplus.command.unmute: true
   hichatplus.command.message:
     description: Allows players to use the message command.
     default: true
+  hichatplus.command.mute:
+    description: Allows players to use the mute command.
+    default: op
+  hichatplus.command.unmute:
+    description: Allows players to use the unmute command.
+    default: op

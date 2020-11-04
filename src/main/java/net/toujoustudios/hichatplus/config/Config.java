@@ -435,4 +435,27 @@ public class Config {
 
     }
 
+    public static YamlConfiguration getConfigFile(String filename) {
+
+        File file = new File("plugins/" + HiChatPlus.PLUGIN_NAME + "/" + filename);
+        return YamlConfiguration.loadConfiguration(file);
+
+    }
+
+    public static void saveToFile(YamlConfiguration configuration, String filename) {
+
+        File file = new File("plugins/" + HiChatPlus.PLUGIN_NAME + "/" + filename);
+
+        try {
+
+            configuration.save(file);
+
+        } catch(IOException exception) {
+
+            exception.printStackTrace();
+
+        }
+
+    }
+
 }
