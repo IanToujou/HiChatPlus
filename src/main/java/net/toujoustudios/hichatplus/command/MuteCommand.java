@@ -25,6 +25,35 @@ public class MuteCommand implements CommandExecutor {
 
         if(player.hasPermission("hichatplus.command.mute")) {
 
+            if(args.length > 1) {
+            
+                Player target = Bukkit.getPlayer(args[0]);
+                
+                if(target != null) {
+                
+                    String reason = "";
+                    
+                    for(int i = 1; i < args.length; i++) {
+                        
+                        reason = reason + args[i] + " ";
+                        
+                    }
+                    
+                    PlayerManager targetManager = PlayerManager.getPlayers().get(target.getUniqueId());
+                    
+                targetManager.setMuted(true);
+                player.sendMessage("");
+                target.sendMessage("");
+                
+                } else {
+                
+                    player.sendMessage(Config.MESSAGE_ERROR_NOPLAYER);
+                
+                }
+            
+            } else {
+            
+            player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Prefix}", Config.MESSAGE_PREFIX);
 
         } else {
 
