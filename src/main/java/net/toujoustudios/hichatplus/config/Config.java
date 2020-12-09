@@ -56,6 +56,12 @@ public class Config {
     public static String MESSAGE_ERROR_NOPERMISSION;
     public static String MESSAGE_ERROR_SYNTAX;
     public static String MESSAGE_ERROR_INVALIDPLAYER;
+    public static String MESSAGE_ERROR_MUTED_CHAT;
+
+    public static String MESSAGE_NOTIFICATION_MUTE_SENDER;
+    public static String MESSAGE_NOTIFICATION_MUTE_TARGET;
+    public static String MESSAGE_NOTIFICATION_UNMUTE_SENDER;
+    public static String MESSAGE_NOTIFICATION_UNMUTE_TARGET;
 
     //Sound
     public static boolean CHAT_PRIVATE_SOUND_ENABLED;
@@ -63,6 +69,7 @@ public class Config {
     public static float CHAT_PRIVATE_SOUND_PITCH;
     public static SoundCategory CHAT_PRIVATE_SOUND_CATEGORY;
 
+    @SuppressWarnings("all")
     public static void initialize() {
 
         Logger.log(LogLevel.INFORMATION, "Loading configuration files...");
@@ -140,10 +147,10 @@ public class Config {
                 if(!configuration.isSet("Chat.Private.Color")) {
                     configuration.set("Chat.Private.Color", "§a");
                 }
-                if(!configuration.isSet("Chat.Private.FormatSender")) {
+                if(!configuration.isSet("Chat.Private.Format.Sender")) {
                     configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
                 }
-                if(!configuration.isSet("Chat.Private.FormatTarget")) {
+                if(!configuration.isSet("Chat.Private.Format.Target")) {
                     configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Emoji.Enabled")) {
@@ -237,6 +244,15 @@ public class Config {
                 if(!configuration.isSet("Message.Error.InvalidPlayer")) {
                     configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
                 }
+                if(!configuration.isSet("Message.Error.MutedChat")) {
+                    configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
+                }
+                if(!configuration.isSet("Message.Notification.Mute.Sender")) {
+                    configuration.set("Message.Notification.MutePlayer.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+                }
+                if(!configuration.isSet("Message.Notification.Mute.Target")) {
+                    configuration.set("Message.Notification.MutePlayer.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                }
 
                 try {
                     configuration.save(settingsConfigFile);
@@ -291,10 +307,10 @@ public class Config {
             if(!configuration.isSet("Chat.Private.Color")) {
                 configuration.set("Chat.Private.Color", "§a");
             }
-            if(!configuration.isSet("Chat.Private.FormatSender")) {
+            if(!configuration.isSet("Chat.Private.Format.Sender")) {
                 configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
             }
-            if(!configuration.isSet("Chat.Private.FormatTarget")) {
+            if(!configuration.isSet("Chat.Private.Format.Target")) {
                 configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
             }
             if(!configuration.isSet("Chat.Emoji.Enabled")) {
@@ -388,6 +404,15 @@ public class Config {
             if(!configuration.isSet("Message.Error.InvalidPlayer")) {
                 configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
             }
+            if(!configuration.isSet("Message.Error.MutedChat")) {
+                configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
+            }
+            if(!configuration.isSet("Message.Notification.Mute.Sender")) {
+                configuration.set("Message.Notification.MutePlayer.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+            }
+            if(!configuration.isSet("Message.Notification.Mute.Target")) {
+                configuration.set("Message.Notification.MutePlayer.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+            }
 
             try {
                 configuration.save(settingsConfigFile);
@@ -421,15 +446,20 @@ public class Config {
         CHAT_PRIVATE_SOUND_PITCH = (float) settingsConfig.getDouble("Chat.Private.Sound.Pitch");
         CHAT_PRIVATE_SOUND_CATEGORY = SoundCategory.valueOf(settingsConfig.getString("Chat.Private.Sound.Category"));
         CHAT_PRIVATE_COLOR = settingsConfig.getString("Chat.Private.Color");
-        CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Chat.Private.FormatSender");
-        CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Chat.Private.FormatTarget");
+        CHAT_PRIVATE_FORMAT_SENDER = settingsConfig.getString("Chat.Private.Format.Sender");
+        CHAT_PRIVATE_FORMAT_TARGET = settingsConfig.getString("Chat.Private.Format.Target");
         CHAT_EMOJI_ENABLED = settingsConfig.getBoolean("Chat.Emoji.Enabled");
         CHAT_EMOJI_LIST = settingsConfig.getStringList("Chat.Emoji.List");
 
         MESSAGE_PREFIX = settingsConfig.getString("Message.Prefix");
-        MESSAGE_ERROR_NOPERMISSION = settingsConfig.getString("Message.Error.NoPermission");
-        MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax");
-        MESSAGE_ERROR_INVALIDPLAYER = settingsConfig.getString("Message.Error.InvalidPlayer");
+        MESSAGE_ERROR_NOPERMISSION = settingsConfig.getString("Message.Error.NoPermission").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_INVALIDPLAYER = settingsConfig.getString("Message.Error.InvalidPlayer").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_MUTED_CHAT = settingsConfig.getString("Message.Error.MutedChat").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_NOTIFICATION_MUTE_SENDER = settingsConfig.getString("Message.Notification.Mute.Sender").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_NOTIFICATION_MUTE_TARGET = settingsConfig.getString("Message.Notification.Mute.Target").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_NOTIFICATION_UNMUTE_SENDER = settingsConfig.getString("Message.Notification.Unmute.Sender").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_NOTIFICATION_UNMUTE_TARGET = settingsConfig.getString("Message.Notification.Unmute.Target").replace("{Prefix}", MESSAGE_PREFIX);
 
         Logger.log(LogLevel.INFORMATION, "Successfully loaded the configuration files.");
 

@@ -85,11 +85,11 @@ public class MessageCommand implements CommandExecutor {
                 }
 
             } else {
-                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Prefix}", Config.MESSAGE_PREFIX).replace("{Usage}", command.getUsage()));
+                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", command.getUsage()));
             }
 
         } else {
-            player.sendMessage(Config.MESSAGE_ERROR_NOPERMISSION.replace("{Prefix}", Config.MESSAGE_PREFIX));
+            player.sendMessage(Config.MESSAGE_ERROR_NOPERMISSION);
         }
 
         return false;

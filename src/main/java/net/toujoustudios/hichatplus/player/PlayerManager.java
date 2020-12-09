@@ -20,11 +20,13 @@ public class PlayerManager {
 
     private UUID uuid;
     private boolean muted;
+    private String muteReason;
 
     public PlayerManager(UUID uuid) {
 
         this.uuid = uuid;
-        muted = playerConfig.getBoolean("Data." + uuid.toString() + ".Muted");
+        muted = playerConfig.getBoolean("Data." + uuid.toString() + ".Mute.Enabled");
+        muteReason = playerConfig.getString("Data." + uuid.toString() + ".Mute.Reason");
 
     }
 
@@ -37,7 +39,8 @@ public class PlayerManager {
 
     public void save() {
 
-        playerConfig.set("Data." + uuid.toString() + ".Muted", muted);
+        playerConfig.set("Data." + uuid.toString() + ".Mute.Enabled", muted);
+        playerConfig.set("Data." + uuid.toString() + ".Mute.Reason", muteReason);
         Config.saveToFile(playerConfig, "playerdata.yml");
 
     }
@@ -66,6 +69,18 @@ public class PlayerManager {
 
     public void setMuted(boolean muted) {
         this.muted = muted;
+    }
+
+    public String getMuteReason() {
+        if(isMuted()) {
+            return muteReason;
+        } else {
+            return null;
+        }
+    }
+
+    public void setMuteReason(String muteReason) {
+        this.muteReason = muteReason;
     }
 
     public static void unloadAll() {

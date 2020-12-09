@@ -2,6 +2,7 @@ package net.toujoustudios.hichatplus.command;
 
 import net.toujoustudios.hichatplus.config.Config;
 import net.toujoustudios.hichatplus.player.PlayerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,10 +26,33 @@ public class UnMuteCommand implements CommandExecutor {
 
         if(player.hasPermission("hichatplus.command.unmute")) {
 
+            if(args.length == 1) {
+
+                Player target = Bukkit.getPlayer(args[0]);
+
+                if(target != null) {
+
+                    PlayerManager targetManager = PlayerManager.getPlayers().get(target.getUniqueId());
+
+                    targetManager.setMuted(false);
+                    player.sendMessage(Config.MESSAGE_NOTIFICATION_UNMUTE_SENDER.replace("{Player}", target.getName()));
+                    target.sendMessage(Config.MESSAGE_NOTIFICATION_UNMUTE_TARGET);
+
+                } else {
+
+                    player.sendMessage(Config.MESSAGE_ERROR_INVALIDPLAYER);
+
+                }
+
+            } else {
+
+                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", command.getUsage()));
+
+            }
 
         } else {
 
-            player.sendMessage(Config.MESSAGE_ERROR_NOPERMISSION.replace("{Prefix}", Config.MESSAGE_PREFIX));
+            player.sendMessage(Config.MESSAGE_ERROR_NOPERMISSION);
 
         }
 
