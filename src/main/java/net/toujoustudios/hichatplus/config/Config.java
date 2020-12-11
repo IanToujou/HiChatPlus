@@ -248,10 +248,16 @@ public class Config {
                     configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
                 }
                 if(!configuration.isSet("Message.Notification.Mute.Sender")) {
-                    configuration.set("Message.Notification.MutePlayer.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+                    configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
                 }
                 if(!configuration.isSet("Message.Notification.Mute.Target")) {
-                    configuration.set("Message.Notification.MutePlayer.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                    configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                }
+                if(!configuration.isSet("Message.Notification.Unmute.Sender")) {
+                    configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted §8.");
+                }
+                if(!configuration.isSet("Message.Notification.Unmute.Target")) {
+                    configuration.set("Message.Notification.Unmute.Target", "{Prefix} §cYou have been unmuted§8.");
                 }
 
                 try {
@@ -408,10 +414,16 @@ public class Config {
                 configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
             }
             if(!configuration.isSet("Message.Notification.Mute.Sender")) {
-                configuration.set("Message.Notification.MutePlayer.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+                configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
             }
             if(!configuration.isSet("Message.Notification.Mute.Target")) {
-                configuration.set("Message.Notification.MutePlayer.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+            }
+            if(!configuration.isSet("Message.Notification.Unmute.Sender")) {
+                configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted §8.");
+            }
+            if(!configuration.isSet("Message.Notification.Unmute.Target")) {
+                configuration.set("Message.Notification.Unmute.Target", "{Prefix} §cYou have been unmuted§8.");
             }
 
             try {
