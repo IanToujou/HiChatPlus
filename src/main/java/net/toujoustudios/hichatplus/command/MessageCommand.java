@@ -85,7 +85,7 @@ public class MessageCommand implements CommandExecutor {
                 }
 
             } else {
-                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", command.getUsage()));
+                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             }
 
         } else {
@@ -93,6 +93,12 @@ public class MessageCommand implements CommandExecutor {
         }
 
         return false;
+
+    }
+
+    public String getUsage() {
+
+        return "/message <player> <message>";
 
     }
 

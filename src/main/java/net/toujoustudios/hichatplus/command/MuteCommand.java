@@ -2,6 +2,7 @@ package net.toujoustudios.hichatplus.command;
 
 import net.toujoustudios.hichatplus.config.Config;
 import net.toujoustudios.hichatplus.player.PlayerManager;
+import net.toujoustudios.hichatplus.string.StringTools;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,25 +27,35 @@ public class MuteCommand implements CommandExecutor {
 
         if(player.hasPermission("hichatplus.command.mute")) {
 
-            if(args.length > 1) {
+            if(args.length > 0) {
 
                 Player target = Bukkit.getPlayer(args[0]);
 
                 if(target != null) {
 
                     StringBuilder reasonBuilder = new StringBuilder();
-                    for(int i = 1; i < args.length; i++) {
 
-                        reasonBuilder.append(args[i]);
-                        if(i != (args.length - 1)) reasonBuilder.append(" ");
+                    if(args.length > 1) {
 
+                        for(int i = 1; i < args.length; i++) {
+
+                            reasonBuilder.append(args[i]);
+                            if(i != (args.length - 1)) reasonBuilder.append(" ");
+
+                        }
+
+                    } else {
+                        reasonBuilder.append("None ");
                     }
+
+                    String reason = reasonBuilder.toString();
+                    reason = StringTools.dropLastChar(reason);
 
                     PlayerManager targetManager = PlayerManager.getPlayers().get(target.getUniqueId());
 
-                    targetManager.setMuted(true);
+                    targetManager.mute(reason);
                     player.sendMessage(Config.MESSAGE_NOTIFICATION_MUTE_SENDER.replace("{Player}", target.getName()).replace("{Reason}", reasonBuilder.toString()));
-                    target.sendMessage(Config.MESSAGE_NOTIFICATION_MUTE_TARGET.replace("{Reason}", reasonBuilder.toString()));
+                    target.sendMessage(Config.MESSAGE_NOTIFICATION_MUTE_TARGET.replace("{Reason}", reason));
 
                 } else {
 
@@ -54,7 +65,7 @@ public class MuteCommand implements CommandExecutor {
 
             } else {
 
-                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", command.getUsage()));
+                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
 
             }
 
@@ -65,6 +76,12 @@ public class MuteCommand implements CommandExecutor {
         }
 
         return false;
+
+    }
+
+    public String getUsage() {
+
+        return "/mute <player> [<reason>]";
 
     }
 

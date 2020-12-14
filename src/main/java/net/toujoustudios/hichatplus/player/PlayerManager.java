@@ -51,6 +51,20 @@ public class PlayerManager {
 
     }
 
+    public void mute(String reason) {
+
+        this.muted = true;
+        this.muteReason = reason;
+
+    }
+
+    public void unmute() {
+
+        this.muted = false;
+        this.muteReason = null;
+
+    }
+
     public UUID getUUID() {
 
         return uuid;
@@ -75,7 +89,7 @@ public class PlayerManager {
         if(isMuted()) {
             return muteReason;
         } else {
-            return null;
+            return "None";
         }
     }
 

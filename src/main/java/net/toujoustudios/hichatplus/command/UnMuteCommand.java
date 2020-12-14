@@ -46,7 +46,7 @@ public class UnMuteCommand implements CommandExecutor {
 
             } else {
 
-                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", command.getUsage()));
+                player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
 
             }
 
@@ -57,6 +57,12 @@ public class UnMuteCommand implements CommandExecutor {
         }
 
         return false;
+
+    }
+
+    public String getUsage() {
+
+        return "/unmute <player>";
 
     }
 

@@ -148,10 +148,10 @@ public class Config {
                     configuration.set("Chat.Private.Color", "§a");
                 }
                 if(!configuration.isSet("Chat.Private.Format.Sender")) {
-                    configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
+                    configuration.set("Chat.Private.Format.Sender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Private.Format.Target")) {
-                    configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
+                    configuration.set("Chat.Private.Format.Target", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
                 }
                 if(!configuration.isSet("Chat.Emoji.Enabled")) {
                     configuration.set("Chat.Emoji.Enabled", true);
@@ -245,16 +245,16 @@ public class Config {
                     configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
                 }
                 if(!configuration.isSet("Message.Error.MutedChat")) {
-                    configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
+                    configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}");
                 }
                 if(!configuration.isSet("Message.Notification.Mute.Sender")) {
-                    configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+                    configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}");
                 }
                 if(!configuration.isSet("Message.Notification.Mute.Target")) {
-                    configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                    configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}");
                 }
                 if(!configuration.isSet("Message.Notification.Unmute.Sender")) {
-                    configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted §8.");
+                    configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted§8.");
                 }
                 if(!configuration.isSet("Message.Notification.Unmute.Target")) {
                     configuration.set("Message.Notification.Unmute.Target", "{Prefix} §cYou have been unmuted§8.");
@@ -314,10 +314,10 @@ public class Config {
                 configuration.set("Chat.Private.Color", "§a");
             }
             if(!configuration.isSet("Chat.Private.Format.Sender")) {
-                configuration.set("Chat.Private.FormatSender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
+                configuration.set("Chat.Private.Format.Sender", "§6Private §8| §7To §e{Player} §8> {PrivateColor}{Message}");
             }
             if(!configuration.isSet("Chat.Private.Format.Target")) {
-                configuration.set("Chat.Private.FormatTarget", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
+                configuration.set("Chat.Private.Format.Target", "§6Private §8| §7From §e{Player} §8> {PrivateColor}{Message}");
             }
             if(!configuration.isSet("Chat.Emoji.Enabled")) {
                 configuration.set("Chat.Emoji.Enabled", true);
@@ -411,16 +411,16 @@ public class Config {
                 configuration.set("Message.Error.InvalidPlayer", "{Prefix} §cThe given player is invalid§8.");
             }
             if(!configuration.isSet("Message.Error.MutedChat")) {
-                configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}§8.");
+                configuration.set("Message.Error.MutedChat", "{Prefix} §cYou are currently muted§8. §cReason: §e{Reason}");
             }
             if(!configuration.isSet("Message.Notification.Mute.Sender")) {
-                configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}§8.");
+                configuration.set("Message.Notification.Mute.Sender", "{Prefix} §e{Player} §chas been muted §8. §cReason§8: §e{Reason}");
             }
             if(!configuration.isSet("Message.Notification.Mute.Target")) {
-                configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}§8.");
+                configuration.set("Message.Notification.Mute.Target", "{Prefix} §cYou have been muted§8. §cReason§8: §e{Reason}");
             }
             if(!configuration.isSet("Message.Notification.Unmute.Sender")) {
-                configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted §8.");
+                configuration.set("Message.Notification.Unmute.Sender", "{Prefix} §e{Player} §chas been unmuted§8.");
             }
             if(!configuration.isSet("Message.Notification.Unmute.Target")) {
                 configuration.set("Message.Notification.Unmute.Target", "{Prefix} §cYou have been unmuted§8.");
